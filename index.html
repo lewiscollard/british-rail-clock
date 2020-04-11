@@ -17,6 +17,10 @@
       font-family: 'NewRailAlphabet', 'Helvetica Neue', 'helvetica', 'arial', sans-serif;
     }
 
+    [v-cloak] {
+      display: none;
+    }
+
     .fc-Wrapper {
       position: relative;
       align-items: center;
@@ -74,12 +78,13 @@
       position: absolute;
       top: 0;
       bottom: 50%;
+
       transform-origin: 50% 100%;
     }
 
     .hnd-Hour {
       left: calc(50% - 10px);
-      top: 40%;
+      top: 20%;
 
       width: 20px;
 
@@ -94,6 +99,7 @@
 
       width: 5.82%;
 
+      transition-duration: 0.1s;
       transform-origin: 50% 50%;
     }
 
@@ -132,12 +138,11 @@
 
     .dbg-Debug {
       position: fixed;
+      top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
 
-      width: 100%;
-      height: 200px;
+      width: 200px;
+      height: 100%;
     }
 
     /* Circle that helps us get the centre of our clock face perfectly lined up */
@@ -213,10 +218,26 @@
 
       font-size: 14px;
     }
+
+    .mn-Button {
+      width: 100%;
+
+      border: none;
+      background-color: #f30;
+      color: #fff;
+
+      padding: 8px 20px;
+
+      text-align: center;
+    }
+
+    .mn-Input {
+      margin-top: 8px;
+    }
   </style>
 
   <body>
-    <div id="vue-mount">
+    <div id="vue-mount" v-cloak>
       <div class="fc-Wrapper">
         <div class="fc-Face">
           <div class="fc-Face_Background">
@@ -310,6 +331,21 @@
                 <button v-else class="mn-Button" @click="startClock">
                   Resume time
                 </button>
+              </div>
+
+              <div class="mn-Option" v-if="userPreferences.debug">
+                <div class="mn-Input">
+                  <input type="number" min="0" max="24" v-model="time.hours"> hr
+                </div>
+                <div class="mn-Input">
+                  <input type="number" min="0" max="60" v-model="time.minutes"> min
+                </div>
+                <div class="mn-Input">
+                  <input type="number" min="0" max="60" v-model="time.seconds"> sec
+                </div>
+                <div class="mn-Input">
+                  <input type="number" v-model="time.milliseconds"> ms
+                </div>
               </div>
             </div>
           </div>
