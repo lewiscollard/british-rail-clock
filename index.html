@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>A British Rail Clock.</title>
+  </head>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+
+      font-family: 'NewRailAlphabet', 'Helvetica Neue', 'helvetica', 'arial', sans-serif;
+    }
+
+    .fc-Wrapper {
+      position: relative;
+      align-items: center;
+      justify-content: center;
+
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+
+      background-color: #000;
+      color: #fff;
+    }
+
+    .fc-Face {
+      position: relative;
+
+      width: 500px;
+      height: 500px;
+
+      background-color: #fff;
+      border-radius: 50%;
+    }
+
+    .fc-Face_Background {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .fc-Face_Background svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .fc-Face_Logo {
+      position: absolute;
+
+      bottom: 25%;
+      left: 47%;
+
+      height: 6%;
+      width: 6%;
+    }
+
+    .fc-Face_Logo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hnd-Hour,
+    .hnd-Minute,
+    .hnd-Second {
+      position: absolute;
+      top: 0;
+      bottom: 50%;
+      transform-origin: 50% 100%;
+    }
+
+    .hnd-Hour {
+      left: calc(50% - 10px);
+
+      width: 20px;
+
+      background-color: #000;
+      color: #fff;
+    }
+
+    .hnd-Minute {
+      left: calc(50% - 8px);
+      z-index: 1;
+
+      width: 16px;
+
+      background-color: #ccc;
+    }
+
+    .hnd-Second {
+      align-items: flex-start;
+
+      display: flex;
+
+      top: 2.95%;
+      bottom: 2.95%;
+      left: calc(50% - 1.17%);
+      z-index: 2;
+
+      width: 2.33%;
+
+      transform-origin: 50% 50%;
+    }
+
+    .hnd-Second svg {
+      position: absolute;
+      top: 0;
+
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .dbg-Debug {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      width: 100%;
+      height: 200px;
+    }
+
+    /* Circle that helps us get the centre of our clock face perfectly lined up */
+    .dbg-Circle {
+      position: absolute;
+      top: calc(50% - 5px);
+      left: calc(50% - 5px);
+      z-index: 10;
+
+      width: 10px;
+      height: 10px;
+
+      border: 2px solid #0f0;
+      border-radius: 50%;
+    }
+
+    .fc-Options {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+
+    .fc-Checkbox {
+      display: block;
+      height: 30px;
+      width: 30px;
+
+      appearance: none;
+      -moz-appearance: none;
+      background-color: #fff;
+      border: 1px solid #aaa;
+    }
+
+    .fc-Checkbox:checked {
+      background-color: #00f;
+    }
+  </style>
+
+  <body>
+    <div id="vue-mount">
+      <div class="fc-Wrapper">
+        <div class="fc-Face">
+          <div class="fc-Face_Background">
+            <!-- SVG for the clock face markers -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1412.3 1412.3">
+              <path fill="#000" d="M766.9 44.08l15.02 1.54-6.1 56.85-15-1.55zm70.7 11.54l14.76 3.1-12 55.9-14.77-3.1zm67.5 16.51l14.37 4.63-17.78 54.34-14.36-4.64zm64.88 23.78l13.8 6.11-23.36 52.18-13.8-6.11zm121.13 69l12.23 8.85-33.7 46.18-12.22-8.85zm55.31 43.08l11.24 10.07-38.35 42.4-11.23-10.07zm50.48 48.08l10.11 11.2-42.56 38.16-10.12-11.2zm44.52 55.03l8.9 12.2-46.33 33.5-8.9-12.18zm72.26 121.24l6.17 13.77-52.28 23.15-6.16-13.78zm25.45 64.28l4.7 14.34-54.41 17.55-4.7-14.34zm16.72 67.8l3.17 14.75-55.95 11.77-3.17-14.75zm12.47 68.11l1.6 15-56.86 5.87-1.6-15zm1.76 135.35l-1.55 15.01-56.84-6.1 1.55-15zm-11.55 70.69l-3.1 14.76-55.9-12 3.1-14.76zm-16.5 67.51l-4.64 14.36-54.33-17.77 4.63-14.37zm-23.79 64.88l-6.11 13.8-52.18-23.37 6.11-13.8zm-68.99 121.14l-8.85 12.22-46.18-33.7 8.85-12.22zm-43.08 55.3l-10.08 11.24-42.4-38.34 10.07-11.24zm-48.09 50.47l-11.19 10.12-38.17-42.57 11.2-10.12zm-55.04 44.53l-12.19 8.9-33.5-46.33 12.19-8.89zm-121.22 72.26l-13.77 6.17-23.15-52.28 13.78-6.16zm-64.28 25.45l-14.35 4.7-17.55-54.41 14.34-4.7zm-67.8 16.72L835 1360l-11.77-55.95 14.75-3.16zm-68.12 12.47l-15 1.6-5.86-56.87 15-1.6zm589.91-682.64v40.73h-166.86v-40.73zm-80.03 334.54l-20.37 35.26-144.5-83.43 20.36-35.27zm-236.4 252.75l-35.27 20.37-83.43-144.5 35.27-20.37zm-410.28 97.35l-15.01-1.54 6.1-56.85 15 1.55zm-70.69-11.54l-14.77-3.1 12-55.9 14.77 3.1zm-67.53-16.51l-14.35-4.63 17.78-54.34 14.36 4.64zm-64.86-23.78l-13.8-6.11 23.36-52.18 13.8 6.11zm-121.14-69l-12.22-8.84 33.7-46.18 12.22 8.84zm-55.3-43.07l-11.24-10.08 38.34-42.4 11.24 10.07zm-50.47-48.09l-10.12-11.19 42.56-38.17 10.12 11.2zm-44.53-55.03l-8.9-12.2 46.32-33.5 8.9 12.19zM98.04 983.04l-6.16-13.77 52.27-23.14 6.17 13.77zm-25.46-64.28l-4.69-14.34 54.41-17.55 4.7 14.34zm-16.7-67.79L52.7 836.2l55.94-11.77 3.17 14.76zM43.4 782.85l-1.6-15 56.87-5.86 1.6 15zm682.64 589.92h-40.73V1205.9h40.73zm-334.54-80.05l-35.27-20.36 83.43-144.5 35.27 20.36zm-252.75-236.4l-20.37-35.27 144.5-83.43 20.37 35.27zM42.44 645.39L44 630.38l56.85 6.09-1.55 15.01zm11.54-70.69l3.1-14.77 55.9 12-3.1 14.77zm16.51-67.52l4.63-14.36 54.34 17.78-4.64 14.36zm23.78-64.88l6.11-13.8 52.18 23.37-6.1 13.8zm69-121.12l8.84-12.23 46.19 33.7-8.85 12.23zm43.08-55.32l10.08-11.23 42.4 38.34-10.07 11.23zm48.07-50.46l11.2-10.12 38.16 42.57-11.19 10.12zm55.05-44.53l12.2-8.9 33.5 46.33-12.19 8.9zM430.7 98.6l13.77-6.16 23.15 52.28-13.78 6.16zm64.28-25.45l14.34-4.7 17.56 54.41-14.34 4.7zm67.8-16.71l14.75-3.17 11.77 55.95-14.75 3.16zm68.12-12.46l15-1.61 5.86 56.87-15 1.6zM40.97 726.6v-40.72h166.86v40.73zm80.05-334.53l20.37-35.27 144.5 83.43-20.36 35.27zm236.4-252.77l35.27-20.36 83.43 144.5-35.27 20.37zM685.68 42.62h40.73v166.86h-40.73zm334.53 80.04l35.28 20.36-83.43 144.51-35.28-20.37zm252.76 236.4l20.37 35.27-144.5 83.43-20.37-35.27z"/>
+          </svg>
+
+
+          </div>
+          <div :style="handStyles.hours" class="hnd-Hour"></div>
+          <div :style="handStyles.minutes" class="hnd-Minute"></div>
+          <div :style="handStyles.seconds" class="hnd-Second">
+            <!-- SVG for the seconds hand. -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.734 219.7195" height="830.436" width="33.0102">
+              <g transform="translate(-118.5148 -12.1736)">
+                <path d="M127.1565 187.9743a4.367 4.367 0 00-5.1677-3.3817 4.367 4.367 0 00-3.3817 5.1678 4.367 4.367 0 005.1677 3.3816 4.367 4.367 0 003.3817-5.1677z" fill="#ff3300"/>
+                <path d="M119.4047 231.8931h6.9737l-1.9182-219.7195h-3.1373z" fill="#ff3300"/>
+                <path v-if="debug" d="M124.4278 188.538a1.5889 1.5889 0 00-1.8802-1.2304 1.5889 1.5889 0 00-1.2303 1.8802 1.5889 1.5889 0 001.8802 1.2304 1.5889 1.5889 0 001.2303-1.8802z" fill="#ff0"/>
+              </g>
+            </svg>
+          </div>
+
+          <div v-if="userPreferences.showLogo" class="fc-Face_Logo">
+            <!-- Optional double-arrow logo -->
+            <svg viewBox="0 0 2061 1236">
+              <path d="M386.94.5l675.12 291.74L2.03 295.29.5 498.44h1069.2l-499.47 239.8-568.2 3.06L.5 945.97l571.26-3.05 618.6 293.26 488.78-1.52-688.87-291.74L2061 941.39V735.2l-1070.72 3.05 501-244.38 568.2 1.52-1.53-204.67-568.2 1.53L863.5.5z" fill="#000"/>
+            </svg>
+          </div>
+
+          <!-- In debug mode, helps us get the centre of the hands lined up perfectly. -->
+          <div class="dbg-Circle" v-if="debug"></div>
+        </div>
+
+        <div class="mn-Menu">
+          <div class="fc-Options">
+            <div class="fc-Option">
+              <input class="fc-Checkbox" type="checkbox" v-model="debug"> Debug mode
+            </div>
+
+            <div class="fc-Option_Group">
+              <h2 class="fc-Option_GroupTitle">
+                Variants
+              </h2>
+            </div>
+            <div class="fc-Option">
+              <input class="fc-Checkbox" type="checkbox" v-model="userPreferences.showLogo"> Logo
+            </div>
+          </div>
+        </div>
+
+        <textarea v-if="debug" class="dbg-Debug">
+Hand rotation:
+{{ handRotation }}
+
+Hand styles:
+{{ handStyles }}
+        </textarea>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      new Vue({
+        el: document.querySelector('#vue-mount'),
+        computed: {
+          handRotation: function () {
+            return {
+              hours: (
+                /* My interpretation of the manual is that both the hour and
+                minute hands should be updated every half-minute. Every 30
+                seconds, a fractional rotation of */
+                (30 * (this.time.hours % 12)) +
+                (Math.floor(this.time.seconds / 30))
+              ),
+              minutes: (
+                /* Similarly to the hour hand, this should be updated every
+                half-minute, i.e. a fractional rotation should be added at the
+                30 second mark. */
+                (6 * this.time.minutes) +
+                (Math.floor(this.time.seconds / 30) * 3)
+              ),
+              seconds: (
+                /* The second hand should have a semi-continuous sweep with
+                the mains frequency, i.e. it should update 50 times a second.
+                Each of these fractional seconds is 0.12 degrees of rotation. */
+                (6 * this.time.seconds) +
+                (0.12 * Math.floor(this.time.milliseconds / 20))
+              ),
+            }
+          },
+
+          handStyles: function () {
+            return {
+              hours: {transform: 'rotate(' + this.handRotation.hours + 'deg)'},
+              minutes: {transform: 'rotate(' + this.handRotation.minutes + 'deg)'},
+              seconds: {transform: 'rotate(' + this.handRotation.seconds + 'deg)'},
+            }
+          },
+
+          secondHandColour: function () {
+            if (this.secondHandColour === 'flameRed') {
+              return
+            }
+          }
+        },
+        data: function () {
+          return {
+            time: {
+              hours: 2,
+              minutes: 16,
+              seconds: 0,
+              milliseconds: 0,
+            },
+            userPreferences: {
+              debug: false,
+              showLogo: true,
+              alternateHandStyle: false,
+              alternateHandColour: false,
+              secondHandColour: 'flameRed',
+              menuOpen: true,
+            },
+          }
+        },
+        methods: {
+          updateTime: function () {
+            const now = new Date();
+
+            this.time.seconds = now.getSeconds();
+            this.time.minutes = now.getMinutes();
+            this.time.hours = now.getHours();
+            this.time.milliseconds = now.getMilliseconds();
+          },
+        },
+        created: function () {
+          // this.updateTime();
+          // According to the specs, the second hand will update with the AC
+          // frequency @ 50hz.
+          window.setInterval(this.updateTime, 20);
+        }
+      });
+    </script>
+  </body>
+</html>
