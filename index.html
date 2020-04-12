@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>A British Rail Clock.</title>
     <meta name="description" content="A digital recreation of a British Rail analogue clock.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   </head>
 
   <style>
@@ -40,8 +42,16 @@
     .fc-Face {
       position: relative;
 
-      width: 500px;
-      height: 500px;
+      flex-shrink: 0;
+
+      /* Fallbacks. Assume that they're on IE11, which means probs a display
+      that is wider than it is tall. */
+      width: 90vh;
+      height: 90vh;
+      /* Otherwise, as we're square, we'll take the smallest of the viewport
+      width or viewport height. */
+      width: min(90vh, 90vw);
+      height: min(90vh, 90vw);
 
       background-color: #fff;
       border-radius: 50%;
@@ -192,7 +202,7 @@
     }
 
     .mn-Trigger {
-      position: fixed;
+      position: absolute;
       top: 24px;
       right: 24px;
       z-index: 11;
@@ -591,7 +601,7 @@ User prefs:
               alternateHandStyle: false,
               alternateHandColour: false,
               secondHandColour: 'flameRed',
-              menuOpen: true,
+              menuOpen: false,
             },
             updateInterval: null,
           }
