@@ -138,8 +138,10 @@
       top: 0;
       left: 0;
 
-      width: 200px;
+      width: 260px;
       height: 100%;
+
+      font-size: 10px;
     }
 
     /* Circle that helps us get the centre of our clock face perfectly lined up */
@@ -368,8 +370,8 @@
                 </div>
 
                 <p class="mn-Option_Details">
-                  The original design manual did not have a logo on the clock
-                  face. However, most clocks spotted in the wild did.
+                  The original design manual did not show a double-arrow logo
+                  on the clock face. However, most clocks spotted in the wild did.
                 </p>
               </div>
 
@@ -472,10 +474,12 @@ User prefs:
             return {
               hours: (
                 /* My interpretation of the manual is that both the hour and
-                minute hands should be updated every half-minute. Every 30
-                seconds, a fractional rotation of */
+                minute hands should be updated every half-minute. For every
+                full minute, add a rotation of 0.5 degrees. If we are past
+                the half-minute mark, add another 0.25 degrees. */
                 (30 * (this.time.hours % 12)) +
-                (Math.floor(this.time.seconds / 30))
+                (0.5 * this.time.minutes) +
+                (0.25 * Math.floor(this.time.seconds / 30))
               ),
               minutes: (
                 /* Similarly to the hour hand, this should be updated every
