@@ -63,9 +63,34 @@
       background-image: -webkit-radial-gradient(50% 50%, 200% 50%, rgb(230, 230, 230) 5%, rgb(217, 217, 217) 30%, rgb(180, 180, 180) 100%);
     }
 
+    .fc-Face_Background-backlit,
+    .fc-Face_Background-backlit::before {
+      background-color: #ffdba7;
+      background-image: -webkit-radial-gradient(50% 50%, 200% 50%, rgb(255, 219, 167) 5%, rgb(249, 199, 141) 30%, rgb(229, 174, 117) 100%);
+    }
+
+    .fc-Face_Background::before {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      border-radius: 50%;
+      opacity: 0.4;
+      /* can't use % but this will do :) */
+      filter: blur(3vh);
+    }
+
     .fc-Face_Background svg {
+      position: relative;
       width: 100%;
       height: 100%;
+
+      /* needed so it shows above the pseudo-element on the backlit version */
+      z-index: 1;
     }
 
     .fc-Face_Logo {
@@ -410,6 +435,7 @@
                   <select class="mn-Option_Select" v-model="userPreferences.faceColour" id="option-face-colour">
                     <option value="white">White</option>
                     <option value="aluminium">Aluminium</option>
+                    <option value="backlit">Backlit (tungsten light)</option>
                   </select>
                 </div>
 
