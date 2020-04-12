@@ -76,19 +76,16 @@
     .hnd-Minute,
     .hnd-Second {
       position: absolute;
-      top: 0;
-      bottom: 50%;
 
-      transform-origin: 50% 100%;
+      transform-origin: 50% 50%;
     }
 
     .hnd-Hour {
-      left: calc(50% - 10px);
+      left: calc(50% - 2.8%);
       top: 20%;
+      bottom: 20%;
 
-      width: 20px;
-
-      background-color: #d3d;
+      width: 5.6%;
     }
 
     .hnd-Minute {
@@ -100,7 +97,6 @@
       width: 5.82%;
 
       transition-duration: 0.1s;
-      transform-origin: 50% 50%;
     }
 
     .hnd-Minute svg {
@@ -123,8 +119,6 @@
       z-index: 2;
 
       width: 2.33%;
-
-      transform-origin: 50% 50%;
     }
 
     .hnd-Second svg {
@@ -165,6 +159,7 @@
       right: 0;
 
       width: 300px;
+      height: 100vh;
       padding: 24px;
 
       background-color: #fff;
@@ -247,13 +242,20 @@
             </svg>
           </div>
 
-          <div :style="handStyles.hours" class="hnd-Hour"></div>
+          <div :style="handStyles.hours" class="hnd-Hour">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.2163 162.6409">
+              <path d="M18.8315 3.2333L11.1305 0 3.381 3.294.0472 162.6834l22.169-.0426z"/>
+              <path v-if="userPreferences.debug" d="M10.2084 118.2985a1.5889 1.5889 0 00.536 2.1821 1.5889 1.5889 0 002.182-.536 1.5889 1.5889 0 00-.536-2.182 1.5889 1.5889 0 00-2.182.536z" fill="#ff0"/>
+            </svg>
+          </div>
+
           <div :style="handStyles.minutes" class="hnd-Minute">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.3098 202.396">
               <path d="M.003 202.4014l22.3068-.005-5.877-200.0187L11.1663.0004 5.8586 2.3841z" fill-rule="evenodd"/>
               <path v-if="userPreferences.debug" d="M9.7977 165.1795c3.4153.7384 6.7826-1.4317 7.5211-4.847.7384-3.4154-1.4317-6.7827-4.847-7.5212-3.4154-.7384-6.7827 1.4316-7.5212 4.847-.7385 3.4154 1.4316 6.7828 4.847 7.5212z" fill="#f0f"/>
             </svg>
           </div>
+
           <div :style="handStyles.seconds" class="hnd-Second">
             <!-- SVG for the seconds hand. -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.734 219.7195" height="830.436" width="33.0102">
