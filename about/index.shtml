@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>About the HTML British Rail clock</title>
+<!--#include virtual="/include/document_head.txt" -->
+<meta name="description" content="About my online reproduction of a British Rail clock." />
+<!--#include virtual="/include/document_head.txt" -->
+</head>
+<body>
+<!--#include virtual="/include/document_top.txt" -->
+
+<h1>About my reproduction British Rail clock</h1>
+
+<p>
+  If you've come to this page from a search engine, <a href="/railways/british-rail-clock/">the clock itself is here!</a>
+</p>
+
+<p>
+  This is a recreation of a British Rail analogue clock in HTML, CSS and Javascript.
+  It is intended to be faithful to the design outlined in the original <a href="http://www.doublearrow.co.uk/manual.htm">British Rail Corporate Identity Manual</a>,
+  and hopefully faithful to at least some of the clocks that were made in the real world.
+</p>
+
+<p>
+  This should work in all modern web browsers, mobile &amp; desktop.
+  I haven't tested Internet Explorer 11 as I write this, though I've tried my best to make sure it works there too.
+  Bug reports are welcomed.
+</p>
+
+<h2>
+  Credits
+</h2>
+
+<p>
+  This project would not have been started were it not for <a href="http://www.nickjob.co.uk/">Nick Job</a>, who accidentally inspired this project with a tweet.
+  Nor would it have been possible to make this reproduction without his comprehensive <a href="http://www.doublearrow.co.uk/manual.htm">digitisation of the British Rail Corporate Identity Manual</a>, which was used as the primary reference material for this project.
+  Check out his definitive <a href="http://www.doublearrow.co.uk/">website</a> and follow him for plenty more BR-era goodness <a href="https://twitter.com/_doublearrow">on Twitter</a>.
+  (Any inaccuracies are entirely my own, and not a fault of his impeccable digitisation.)
+</p>
+
+
+<h2>
+  Todo
+</h2>
+
+<ul>
+  <li>
+    Add bezel options, once I get a feel for what was actually used in real clocks.
+  </li>
+  <li>
+    Add more variants!
+    For example, I know that most real-world versions of this used a much thinner seconds hand than the one detailed in the style manual.
+  </li>
+  <li>
+    ?? Your idea here! See "bugs & suggestions" below.
+  </li>
+</ul>
+
+<h2>
+  Bugs & suggestions
+</h2>
+
+<p>
+  Suggestions are most welcome by <a href="mailto:lewis@lewiscollard.com">email</a>,
+  or as bug reports on <a href="https://github.com/lewiscollard/british-rail-clock">GitHub</a>.
+</p>
+
+<h2>See also</h2>
+
+<p><a href="https://www.aj-computing.co.uk/misc/clock/">A Network SouthEast Clock</a>.</p>
+
+<h2>Copyright</h2>
+
+<p>
+  The code for this clock is in the public domain.
+  You may use it, with or without modifications, for any purpose.
+</p>
+
+<!--#include virtual="/include/document_bottom.txt" -->
+
+</body>
+</html>
