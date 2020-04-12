@@ -127,8 +127,8 @@
     }
 
     .hnd-Hour {
-      left: calc(50% - 2.8%);
       top: 20%;
+      left: calc(50% - 2.8%);
       bottom: 20%;
       /* 1 = above the optional double arrow */
       z-index: 1;
@@ -155,10 +155,6 @@
     }
 
     .hnd-Second {
-      align-items: flex-start;
-
-      display: flex;
-
       top: 2.95%;
       bottom: 2.95%;
       left: calc(50% - 1.17%);
@@ -373,12 +369,10 @@
           <!-- Second hand -->
           <div :style="handStyles.seconds" class="hnd-Second">
             <!-- SVG for the seconds hand. -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.734 219.7195" height="830.436" width="33.0102">
-              <g transform="translate(-118.5148 -12.1736)">
-                <path d="M127.1565 187.9743a4.367 4.367 0 00-5.1677-3.3817 4.367 4.367 0 00-3.3817 5.1678 4.367 4.367 0 005.1677 3.3816 4.367 4.367 0 003.3817-5.1677z" :fill="secondHandFill"/>
-                <path d="M119.4047 231.8931h6.9737l-1.9182-219.7195h-3.1373z" :fill="secondHandFill"/>
-                <path v-if="userPreferences.debug" d="M124.4278 188.538a1.5889 1.5889 0 00-1.8802-1.2304 1.5889 1.5889 0 00-1.2303 1.8802 1.5889 1.5889 0 001.8802 1.2304 1.5889 1.5889 0 001.2303-1.8802z" fill="#ff0"/>
-              </g>
+            <svg viewBox="0 0 8.734 219.7195" height="830.436" width="33.0102">
+              <path :fill="secondHandFill"  d="M8.6417 175.8007a4.367 4.367 0 00-5.1677-3.3817 4.367 4.367 0 00-3.3817 5.1678 4.367 4.367 0 005.1677 3.3816 4.367 4.367 0 003.3817-5.1677z"/>
+              <path :fill="secondHandFill" d="M.8899 219.7195h6.9737L5.9454 0H2.8081z"/>
+              <path v-if="userPreferences.debug" d="M5.913 176.3644a1.5889 1.5889 0 00-1.8802-1.2304 1.5889 1.5889 0 00-1.2303 1.8802 1.5889 1.5889 0 001.8802 1.2304 1.5889 1.5889 0 001.2303-1.8802z" fill="#ff0"/>
             </svg>
           </div>
 
