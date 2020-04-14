@@ -387,7 +387,7 @@
           <div class="dbg-Circle" v-if="userPreferences.debug"></div>
         </div>
 
-        <div class="mn-Trigger" :class="{'mn-Trigger-open': userPreferences.menuOpen}" @click="toggleMenu">
+        <div class="mn-Trigger"  v-if="!distractionFree" :class="{'mn-Trigger-open': userPreferences.menuOpen}" @click="toggleMenu">
           <svg viewBox="0 0 1792 1792">
             <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"/>
           </svg>
@@ -398,7 +398,7 @@
           </div>
         </div>
 
-        <div class="mn-Menu" v-show="userPreferences.menuOpen">
+        <div class="mn-Menu" v-show="userPreferences.menuOpen && !distractionFree">
           <div class="mn-Options">
             <div class="mn-Options_Group">
               <div class="mn-Option">
@@ -476,6 +476,18 @@
 
                 <p class="mn-Option_Details">
                   A world without rules and controls, without borders or boundaries.
+                </p>
+              </div>
+
+              <div class="mn-Option">
+                <div class="mn-Option_Setting">
+                  <input class="mn-Option_Checkbox" type="checkbox" v-model="distractionFree" id="option-distractionFree">
+                  <label class="mn-Option_Label" for="option-distractionFree">Distraction-free mode</label>
+                </div>
+
+                <p class="mn-Option_Details">
+                  Turns off this menu and hides the "Customise" button. You
+                  can bring it back the latter by reloading the page.
                 </p>
               </div>
 
@@ -604,6 +616,10 @@ User prefs:
               secondHandColour: 'flameRed',
               menuOpen: false,
             },
+            // Separate from userPreferences because we never want to save
+            // this (eventually I will implement saving/restoring
+            // preferences).
+            distractionFree: false,
             updateInterval: null,
           }
         },
