@@ -180,6 +180,10 @@
       width: 260px;
       height: 100%;
 
+      background-color: #000;
+      border: none;
+      border-right: 1px solid #00ff41;
+      color: #00ff41;
       font-size: 10px;
     }
 
@@ -469,18 +473,6 @@
 
               <div class="mn-Option">
                 <div class="mn-Option_Setting">
-                  <input class="mn-Option_Checkbox" type="checkbox" v-model="userPreferences.debug" id="option-debug">
-                  <label class="mn-Option_Label" for="option-debug">Debug mode</label>
-                </div>
-
-
-                <p class="mn-Option_Details">
-                  A world without rules and controls, without borders or boundaries.
-                </p>
-              </div>
-
-              <div class="mn-Option">
-                <div class="mn-Option_Setting">
                   <input class="mn-Option_Checkbox" type="checkbox" v-model="distractionFree" id="option-distractionFree">
                   <label class="mn-Option_Label" for="option-distractionFree">Distraction-free mode</label>
                 </div>
@@ -488,6 +480,18 @@
                 <p class="mn-Option_Details">
                   Turns off this menu and hides the "Customise" button. You
                   can bring it back the latter by reloading the page.
+                </p>
+              </div>
+
+              <div class="mn-Option">
+                <div class="mn-Option_Setting">
+                  <input class="mn-Option_Checkbox" type="checkbox" v-model="userPreferences.debug" id="option-debug">
+                  <label class="mn-Option_Label" for="option-debug">Debug mode</label>
+                </div>
+
+
+                <p class="mn-Option_Details">
+                  A world without rules and controls, without borders or boundaries.
                 </p>
               </div>
 
