@@ -5,7 +5,7 @@
     <title>A British Rail Clock.</title>
     <meta name="description" content="A digital recreation of a British Rail analogue clock.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="canonical" href="https://lewiscollard.com/railways/british-rail-clock/">
   </head>
 
   <style>
@@ -203,14 +203,16 @@
 
     .mn-Trigger {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      top: 12px;
+      right: 12px;
       z-index: 11;
 
       align-items: center;
 
       display: flex;
+      padding: 12px 8px;
 
+      background-color: #000;
       cursor: pointer;
       /* stops duplicate clicks causing a text selection */
       user-select: none;
@@ -219,6 +221,7 @@
     .mn-Trigger-open {
       flex-direction: row-reverse;
 
+      background-color: #fff;
       color: #333;
     }
 
@@ -235,7 +238,7 @@
 
     .mn-Trigger svg {
       width: 20px;
-      height: 20px;
+      height: 13px;
 
       fill: currentColor;
 
@@ -274,6 +277,14 @@
       animation-duration: 0.2s;
     }
 
+    .mn-Option {
+      margin-bottom: 16px;
+    }
+
+    .mn-Option:last-child {
+      margin-bottom: 0;
+    }
+
     .mn-Option_Label {
       display: block;
       margin-top: 3px;
@@ -287,6 +298,8 @@
     }
 
     .mn-Option_Setting {
+      align-items: center;
+
       display: flex;
     }
 
@@ -299,6 +312,7 @@
       display: block;
       height: 20px;
       width: 20px;
+      margin: 0;
       margin-right: 12px;
 
       appearance: none;
@@ -322,6 +336,53 @@
       font-size: 14px;
     }
 
+    .mn-Option_Textarea {
+      width: 100%;
+      height: 100px;
+
+      font-size: 12px;
+    }
+
+    .mn-Option_Expander,
+    .mn-Option_Heading {
+      margin: 0;
+      margin-bottom: 8px;
+
+      font-size: inherit;
+      font-weight: 500;
+    }
+
+    .mn-Option_Heading-largeMargin {
+      margin-bottom: 16px;
+    }
+
+    .mn-Option_Expander {
+      align-items: center;
+      display: flex;
+
+      cursor: pointer;
+    }
+
+    .mn-Option_Expander svg {
+      width: 18px;
+      height: 10px;
+
+      margin-left: auto;
+
+      transform: rotate(90deg);
+    }
+
+    .mn-Option_Expander-expanded svg {
+      transform: rotate(-90deg);
+    }
+
+    .mn-Separator {
+      margin: 16px 0;
+      border: solid #aaa;
+      border-width: 0 0 1px;
+    }
+
+
     .mn-Button {
       display: block;
       width: 100%;
@@ -339,6 +400,10 @@
 
     .mn-Input {
       margin-top: 8px;
+    }
+
+    .mn-Input input {
+      width: 100px;
     }
   </style>
 
@@ -392,8 +457,8 @@
         </div>
 
         <div class="mn-Trigger"  v-if="!distractionFree" :class="{'mn-Trigger-open': userPreferences.menuOpen}" @click="toggleMenu">
-          <svg viewBox="0 0 1792 1792">
-            <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"/>
+          <svg viewBox="0 0 134.484 90.5659">
+            <path d="M.2758 28.5659l75.7272.7144L47.5695.2753 89.7196.1325l44.579 45.0077-44.0075 45.2934H47.5695l28.5763-29.7193-76.013.4286z"/>
           </svg>
 
           <div class="mn-Trigger_Text">
@@ -482,6 +547,52 @@
                   can bring it back the latter by reloading the page.
                 </p>
               </div>
+
+              <hr class="mn-Separator">
+
+              <h2 class="mn-Option_Expander" :class="{'mn-Option_Expander-expanded': showEmbedOptions}" @click="toggleEmbedOptions">
+                Share & embed
+
+                <svg viewBox="0 0 134.484 90.5659">
+                  <path d="M.2758 28.5659l75.7272.7144L47.5695.2753 89.7196.1325l44.579 45.0077-44.0075 45.2934H47.5695l28.5763-29.7193-76.013.4286z"/>
+                </svg>
+              </h2>
+
+              <div class="mn-Option" v-if="showEmbedOptions">
+                <p class="mn-Option_Details">
+                  Copy the link below to share this clock with your current
+                  appearance settings.
+                </p>
+
+                <textarea class="mn-Option_Textarea js-SelectAll" readonly>{{ linkWithSettings }}</textarea>
+              </div>
+
+              <div class="mn-Option" v-if="showEmbedOptions">
+                <h3 class="mn-Option_Heading mn-Option_Heading-largeMargin">Embed on your website/blog</h3>
+
+                <div class="mn-Option">
+                  <div class="mn-Option_Setting">
+                    <input class="mn-Option_Checkbox" type="checkbox" v-model="embedOptions.responsive" id="option-embed-responsive">
+                    <label class="mn-Option_Label" for="option-embed-responsive">Responsive embed</label>
+                  </div>
+
+                  <p class="mn-Option_Details">
+                    This will make your embed go the full width of whatever
+                    its containing element is. Handy if it's in an element
+                    that is already sized, such as a sidebar on your site.
+                  </p>
+                </div>
+                <div class="mn-Option" v-if="!embedOptions.responsive">
+                  <div class="mn-Input">
+                    <input type="number" v-model="embedOptions.widthAndHeight" min="200"> size (px)
+                  </div>
+                </div>
+                <textarea class="mn-Option_Textarea js-SelectAll" readonly>{{ iframeEmbedHTML }}</textarea>
+              </div>
+
+
+              <hr class="mn-Separator">
+
 
               <div class="mn-Option">
                 <div class="mn-Option_Setting">
@@ -594,6 +705,76 @@ User prefs:
             return '#000';
           },
 
+          optionsQueryString: function () {
+            // Converts a subset of the currently selected options to a query
+            // string. This is used for both updating the URL (via the history
+            // API) and, later, for preserving options when an embed code is
+            // selected. We don't want to carry over some settings. For
+            // example, debug mode should never be automatically enabled
+            // via the URL.
+            //
+            // We could do this by a tiny JSON dump, but using the query
+            // string looks less ugly in the URL.
+            const parts = [];
+
+            // Boolean settings should be 1/0.
+            this.booleanQueryOptions.forEach(function (value) {
+              parts.push(value + '=' + (this.userPreferences[value] === true ? '1' : '0'));
+            }.bind(this))
+
+            // And simple string settings.
+            this.stringQueryOptions.forEach(function(value) {
+              parts.push(value + '=' + this.userPreferences[value]);
+            }.bind(this));
+
+            return parts.join('&');
+          },
+
+          linkWithoutSettings: function () {
+            // used by both linkWithSettings and iframeEmbedHTML
+            return window.location.protocol + '//' + window.location.hostname + window.location.pathname;
+          },
+
+          linkWithSettings: function () {
+            return this.linkWithoutSettings + '?' + this.optionsQueryString;
+          },
+
+          iframeEmbedHTML: function () {
+            // Probably should do this in the template as a hidden element and
+            // then get its outerHtml? But I feel that the logic is a little
+            // bit too much for templating and diving back into the template
+            // from JS is a bit hairy.
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('frameborder', '0');
+
+
+            if (this.embedOptions.useCurrentSettings) {
+              iframe.setAttribute('src', this.linkWithSettings + '&');
+            } else {
+              iframe.setAttribute('src', this.linkWithSettings + '?distractionFree=true');
+            }
+
+            let html;
+
+            if (!this.embedOptions.responsive) {
+              iframe.setAttribute('width', this.embedOptions.widthAndHeight);
+              iframe.setAttribute('height', this.embedOptions.widthAndHeight);
+              html = iframe.outerHTML;
+            } else {
+              // Responsive parent, using padding trick to preserve the aspect
+              // ratio.
+              const divOuter = document.createElement('div');
+              divOuter.setAttribute('style', 'position: relative');
+              const divPadder = document.createElement('div');
+              divPadder.setAttribute('style', 'padding-bottom: 100%');
+              iframe.setAttribute('style', 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;');
+              divOuter.appendChild(divPadder);
+              divPadder.appendChild(iframe)
+              html = divOuter.outerHTML
+            }
+            return html;
+          },
+
           secondHandFill: function () {
             if (this.userPreferences.secondHandColour === 'flameRed') {
               return '#ff3300';
@@ -602,6 +783,7 @@ User prefs:
             return '#a41e1b';
           }
         },
+
         data: function () {
           return {
             time: {
@@ -620,15 +802,30 @@ User prefs:
               secondHandColour: 'flameRed',
               menuOpen: false,
             },
+            embedOptions: {
+              useCurrentSettings: true,
+              responsive: true,
+              widthAndHeight: 300,
+            },
             // Separate from userPreferences because we never want to save
             // this (eventually I will implement saving/restoring
             // preferences).
             distractionFree: false,
+            showEmbedOptions: false,
             updateInterval: null,
+
+            // There is probably a better way of doing this. Only used
+            // internally (see query string serialising/deserialising)
+            booleanQueryOptions: ['cheatMarkings', 'showLogo', 'alternateHandStyle', 'alternateHandColour'],
+            stringQueryOptions: ['faceColour', 'secondHandColour'],
           }
         },
         methods: {
-          toggleMenu () {
+          toggleEmbedOptions: function () {
+            this.showEmbedOptions = !this.showEmbedOptions
+          },
+
+          toggleMenu: function () {
             this.userPreferences.menuOpen = !this.userPreferences.menuOpen
           },
 
@@ -655,8 +852,40 @@ User prefs:
             }
             this.updateInterval = null
           },
+
+          // helper, URLSearchParams doesn't exist in IE11 :(
+          // modified from https://stackoverflow.com/a/13419367
+          parseQueryString: function (queryString) {
+            const query = {};
+            const pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+            pairs.forEach(function (value, ignore) {
+              const pair = value.split('=');
+              query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+            });
+            return query;
+          },
         },
         created: function () {
+          // Load prefs from query string if present.
+          const parsedQuery = this.parseQueryString(window.location.search);
+          // Boolean settings should be 1/0.
+          this.booleanQueryOptions.forEach(function (key) {
+            if (parsedQuery[key]) {
+              this.userPreferences[key] = (parsedQuery[key] === '1')
+            }
+          }.bind(this))
+
+          // And simple string settings.
+          this.stringQueryOptions.forEach(function(key) {
+            if (parsedQuery[key]) {
+              this.userPreferences[key] = parsedQuery[key]
+            }
+          }.bind(this));
+
+          if (parsedQuery.distractionFree) {
+            this.distractionFree = (parsedQuery.distractionFree === '1')
+          }
+
           this.updateTime();
           this.startClock();
         },
