@@ -29,6 +29,64 @@
 </p>
 
 <h2>
+  Hand timing
+</h2>
+
+<p>
+  The second hand appears to move in a continuous sweep.
+  It's actually every 1/50 of a second (20 milliseconds).
+  This is slightly slower than the refresh rates of most modern computer & device displays
+  (and much slower than 120 Hz mega-displays),
+  which is why it might feel a little janky or hesitant. This is intentional!
+</p>
+
+<p>
+  Why 1/50 of a second? These clocks were synchonised by the mains AC cycle, which in the United Kingdom is 50 hz (50 cycles per second).
+</p>
+
+<p>
+  At zero and thirty seconds, the minute hand is advanced by half a minute (3 degrees), and the hour hand is advanced by a hundred and twentieth of an hour (0.25 degrees).
+</p>
+
+
+<h2>
+  About mobile apps
+</h2>
+
+<p>
+  A few days before I officially released this clock, I sent the link to a few people for their opinions,
+  and they passed it to some other people,
+  and even before I officially released it I received a couple of emails asking if I would release this as an app and/or widget for phones & tablets.
+</p>
+
+<p>
+  Writing an app and/or widget for phones would require re-writing it at least twice; once for Android, once for Apple devices.
+  I optimise for the reaching the largest number of people.
+</p>
+
+<p>
+  Writing this for the web means I write it once and it works everywhere.
+</p>
+
+<p>
+  Writing it for the web means that anyone can see it and play with instantly.
+</p>
+
+<p>
+  Writing it for the web means that anyone can grab the code, tweak it, and find new and creative things to do with it.
+  (For you techie people out there: this is twhy I have not minified the code, why there is no build system,
+  and why it is all in one self-contained <a href="https://github.com/lewiscollard/british-rail-clock/blob/master/index.html">monstrosity of an HTML file</a>.
+  I have optimised for ease of play &amp; tweaking.)
+</p>
+
+<p>
+  A native app probably won't happen, because I have no interest in making one.
+  But I sincerely hope the <a href="https://github.com/lewiscollard/british-rail-clock">code</a>
+  might give someone an idea or two.
+  (See "Copyright" below; this is explicitly encouraged.)
+</p>
+
+<h2>
   Credits
 </h2>
 
@@ -73,7 +131,8 @@
 <h2>Copyright</h2>
 
 <p>
-  The code for this clock is in the public domain.
+  The code for this clock <a href="https://unlicense.org/">is in the public domain</a>.
+  I encourage you to steal my code and/or ideas therein for your own projects.
   You may use it, with or without modifications, for any purpose.
 </p>
 
