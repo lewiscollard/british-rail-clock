@@ -74,7 +74,7 @@
 
 <p>
   Writing it for the web means that anyone can grab the code, tweak it, and find new and creative things to do with it.
-  (For you techie people out there: this is twhy I have not minified the code, why there is no build system,
+  (For you techie people out there: this is why I have not minified the code, why there is no build system,
   and why it is all in one self-contained <a href="https://github.com/lewiscollard/british-rail-clock/blob/master/index.html">monstrosity of an HTML file</a>.
   I have optimised for ease of play &amp; tweaking.)
 </p>
