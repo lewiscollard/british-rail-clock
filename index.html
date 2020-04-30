@@ -84,6 +84,13 @@
       background-image: -webkit-radial-gradient(50% 50%, 200% 50%, rgb(255, 219, 167) 5%, rgb(249, 199, 141) 30%, rgb(229, 174, 117) 100%);
     }
 
+    .fc-Face_Background-backlitFluorescent,
+    .fc-Face_Background-backlitFluorescent::before {
+      /* ref photo: https://commons.wikimedia.org/wiki/File:Clapham_Junction_Railway_Station_-_Foot_Tunnel_at_Night_-_London_-_240404.jpg */
+      background-color: #fcff98;
+      background-image: -webkit-radial-gradient(50% 50%, 200% 50%, rgb(234, 235, 230) 2%, rgb(255, 254, 209) 30%, rgb(203, 208, 94) 90%);
+    }
+
     .fc-Face_Background::before {
       content: '';
 
@@ -517,6 +524,7 @@
                     <option value="white">White</option>
                     <option value="aluminium">Aluminium</option>
                     <option value="backlitTungsten">Backlit (tungsten light)</option>
+                    <option value="backlitFluorescent">Backlit (fluorescent light)</option>
                   </select>
                 </div>
 
