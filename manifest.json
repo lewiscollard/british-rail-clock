@@ -1,0 +1,21 @@
+{
+  "short_name": "BR Clock",
+  "name": "British Rail Clock",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/british-rail-clock/",
+  "background_color": "#ff3300",
+  "display": "standalone",
+  "scope": "/british-rail-block/",
+  "theme_color": "#ff3300"
+}
